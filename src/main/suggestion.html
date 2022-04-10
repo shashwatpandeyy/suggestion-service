@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>
+        Innovaccer
+    </title>
+</head>
+<script
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
+</script>
+<script
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js">
+</script>
+<script>
+        var ngApp = angular.module('myNgApp', []);
+
+        ngApp.controller('myController', function ($scope, $http) {
+            $scope.message = "Hello World!";
+            $http.get('http://localhost:8080/api/suggestion').then(function(response){
+                $scope.data = response.data;
+            });
+        });
+    </script>
+<body ng-app = "myNgApp">
+<h3>
+    Following suggestions for the day:
+</h3>
+<div ng-controller="myController">
+    <div class="checkbox" ng-repeat="suggestion in data">
+        <label class="smallPadding"><li>{{ suggestion }}</li></label>
+    </div>
+</div>
+</body>
+</html>
