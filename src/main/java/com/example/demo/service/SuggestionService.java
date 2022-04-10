@@ -13,12 +13,13 @@ import java.util.Map;
  */
 @Service
 public class SuggestionService {
-
+    String localUrl = "http://localhost:8080/api/third_party_api";
+    String herokuUrl = "https://suggestion-service.herokuapp.com/api/third_party_api";
 
     public List<String> suggestions() {
-        String url = "http://localhost:8080/api/third_party_api";
+
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, String> activityData = (Map<String, String>) restTemplate.getForObject(url, Map.class);
+        Map<String, String> activityData = (Map<String, String>) restTemplate.getForObject(herokuUrl, Map.class);
         if (activityData!=null) {
             return suggestionModel(activityData);
         }
